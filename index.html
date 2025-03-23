@@ -41,7 +41,7 @@
 
         .movie-poster:hover {
             transform: scale(1.02);
-            filter: brightness(1.1);
+            
         }
 
         .movie-title {
@@ -122,8 +122,16 @@
 
         function savePoster() {
             const posterUrl = document.getElementById('movie-poster').src;
-            const link = document.createElement('a');
-            link.href = posterUrl;
+            fetch(posterUrl).then(response => response.blob()).then(blob => {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'movie-poster.jpg';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            });
             link.download = 'movie-poster.jpg';
             document.body.appendChild(link);
             link.click();
