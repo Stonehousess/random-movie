@@ -109,6 +109,33 @@ Random-movie
 108
 109
 110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,12 +161,11 @@ Random-movie
             width: 100%;
             height: 100vh;
             object-fit: contain;
-            margin-top: 5px;
-            padding-top: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
             cursor: pointer;
             transition: transform 0.2s ease-in-out;
+            margin-top: 5px;
         }
 
         .movie-poster:hover {
@@ -168,6 +194,22 @@ Random-movie
         .tmdb-logo:hover {
             opacity: 1;
         }
+
+        .save-button {
+            margin-top: 20px;
+            background-color: #1db954;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .save-button:hover {
+            background-color: #17a44a;
+        }
     </style>
 </head>
 <body>
@@ -179,21 +221,23 @@ Random-movie
                 <img src="https://www.themoviedb.org/assets/2/v4/logos/208x226-stacked-e31a1859d8506a1e0586cc4684d1a1be1c0c5f8e11ddf101f3c906e82b5c024d.png" alt="TMDb Logo" class="tmdb-logo">
             </a>
         </div>
+        <button class="save-button" onclick="savePoster()">Save Poster</button>
     </div>
 
     <script>
         const API_KEY = 'e8d804d1f104509d3c1c5b1166485ae6';
         const BASE_URL = 'https://api.themoviedb.org/3';
+        let currentPosterUrl = '';
 
         async function getRandomAnimeMovie() {
             try {
-                // Anime genre ID is 16 on TMDb
                 const response = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=16&sort_by=popularity.desc&page=${Math.floor(Math.random() * 50) + 1}`);
                 const data = await response.json();
                 const movies = data.results;
                 if (movies.length > 0) {
                     const randomMovie = movies[Math.floor(Math.random() * movies.length)];
-                    document.getElementById('movie-poster').src = `https://image.tmdb.org/t/p/original${randomMovie.poster_path}`;
+                    currentPosterUrl = `https://image.tmdb.org/t/p/original${randomMovie.poster_path}`;
+                    document.getElementById('movie-poster').src = currentPosterUrl;
                     const title = randomMovie.title || 'Unknown Title';
                     const year = randomMovie.release_date ? `(${new Date(randomMovie.release_date).getFullYear()})` : '';
                     const rating = randomMovie.vote_average ? `⭐ ${randomMovie.vote_average.toFixed(1)}` : '';
@@ -207,16 +251,26 @@ Random-movie
             }
         }
 
-        // Clear any rogue text at the top of the page
-        
+        async function savePoster() {
+            if (currentPosterUrl) {
+                const response = await fetch(currentPosterUrl);
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'poster.jpg';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            } else {
+                alert('No poster to save!');
+            }
+        }
 
-        // Load a movie on page load
         window.onload = getRandomAnimeMovie;
-
-        // Auto-refresh every 1 minute (60,000ms)
         setInterval(getRandomAnimeMovie, 60000);
     </script>
 </body>
 </html>
-
 
