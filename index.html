@@ -105,6 +105,9 @@
                 const title = randomMovie.title || randomMovie.name || 'Unknown Title';
                 const year = randomMovie.release_date ? `(${new Date(randomMovie.release_date).getFullYear()})` : (randomMovie.first_air_date ? `(${new Date(randomMovie.first_air_date).getFullYear()})` : '');
                 const rating = randomMovie.vote_average ? `⭐ ${randomMovie.vote_average.toFixed(1)}` : '';
+                document.getElementById('movie-title').innerText = `${title} ${year} ${rating}`.trim();
+                const year = randomMovie.release_date ? `(${new Date(randomMovie.release_date).getFullYear()})` : (randomMovie.first_air_date ? `(${new Date(randomMovie.first_air_date).getFullYear()})` : '');
+                const rating = randomMovie.vote_average ? `⭐ ${randomMovie.vote_average.toFixed(1)}` : '';
 
                 document.getElementById('movie-poster').src = `https://image.tmdb.org/t/p/w500${randomMovie.poster_path}`;
                 document.getElementById('movie-title').innerText = `${title} ${year} ${rating}`.trim();
