@@ -113,7 +113,7 @@
                 const year = randomMovie.release_date ? `(${new Date(randomMovie.release_date).getFullYear()})` : (randomMovie.first_air_date ? `(${new Date(randomMovie.first_air_date).getFullYear()})` : '');
                 const rating = randomMovie.vote_average ? `⭐ ${randomMovie.vote_average.toFixed(1)}` : '';
 
-                document.getElementById('movie-poster').src = `https://image.tmdb.org/t/p/w500${randomMovie.poster_path}`;
+                document.getElementById('movie-poster').src = `https://image.tmdb.org/t/p/original${randomMovie.poster_path}`;
                 document.getElementById('movie-title').innerText = `${title} ${year} ${rating}`.trim();
             } catch (error) {
                 console.error('Error fetching movie:', error);
