@@ -89,6 +89,9 @@
 
         // Load a movie on page load
         window.onload = getRandomAnimeMovie;
+
+        // Auto-refresh every 5 minutes (300,000ms)
+        setInterval(getRandomAnimeMovie, 60000);
     </script>
 </body>
 </html>
