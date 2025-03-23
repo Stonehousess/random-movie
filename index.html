@@ -101,6 +101,9 @@ Random-movie
 100
 101
 102
+103
+104
+105
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -124,8 +127,8 @@ Random-movie
 
         .movie-poster {
             width: 100%;
-            height: 100vh; /* Stretch to full vertical height */
-            object-fit: cover; /* Maintain aspect ratio and fill container */
+            height: 100vh;
+            object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
             cursor: pointer;
@@ -184,7 +187,10 @@ Random-movie
                 if (movies.length > 0) {
                     const randomMovie = movies[Math.floor(Math.random() * movies.length)];
                     document.getElementById('movie-poster').src = `https://image.tmdb.org/t/p/original${randomMovie.poster_path}`;
-                    document.getElementById('movie-title').innerText = randomMovie.title;
+                    const title = randomMovie.title || 'Unknown Title';
+                    const year = randomMovie.release_date ? `(${new Date(randomMovie.release_date).getFullYear()})` : '';
+                    const rating = randomMovie.vote_average ? `⭐ ${randomMovie.vote_average.toFixed(1)}` : '';
+                    document.getElementById('movie-title').innerText = `${title} ${year} ${rating}`;
                 } else {
                     document.getElementById('movie-title').innerText = 'No movies found';
                 }
@@ -204,4 +210,3 @@ Random-movie
 </html>
 
 
-	
