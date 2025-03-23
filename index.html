@@ -11,7 +11,7 @@
             box-sizing: border-box;
             font-family: Tahoma, sans-serif;
             background-color: black;
-            height: 100vh; object-fit: cover;
+            height: auto; object-fit: cover;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -125,6 +125,7 @@
         }
 
         window.onload = getRandomAnimeMovie;
+            setInterval(getRandomAnimeMovie, 60000);
     </script>
 </body>
 </html>
