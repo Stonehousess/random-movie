@@ -104,6 +104,7 @@
                 const data = await response.json();
                 console.log('Fetched Data:', data);
                 console.log('Results:', data.results);
+                console.log('Random Movie:', randomMovie);
                 const movies = data.results;
                 if (movies.length > 0) {
                     const randomMovie = movies[Math.floor(Math.random() * movies.length)];
