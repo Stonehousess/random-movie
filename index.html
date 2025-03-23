@@ -32,11 +32,16 @@
         }
 
         .movie-poster {
-            width: auto;
+            width: auto; height: 100vh; object-fit: cover;
             height: 100vh;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 8px; transition: transform 0.3s ease, filter 0.3s ease;
             cursor: pointer;
+        }
+
+        .movie-poster:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
         }
 
         .movie-title {
