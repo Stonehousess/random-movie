@@ -104,6 +104,8 @@ Random-movie
 103
 104
 105
+106
+107
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -200,6 +202,9 @@ Random-movie
             }
         }
 
+        // Clear any rogue text at the top of the page
+        document.body.innerHTML = document.body.innerHTML.trim();
+
         // Load a movie on page load
         window.onload = getRandomAnimeMovie;
 
@@ -208,5 +213,4 @@ Random-movie
     </script>
 </body>
 </html>
-
 
