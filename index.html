@@ -109,7 +109,6 @@ Random-movie
 108
 109
 110
-111
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -135,8 +134,7 @@ Random-movie
             width: 100%;
             height: 100vh;
             object-fit: contain;
-            margin-top: 10px;
-            margin-top: 10px;
+            margin-top: 5px;
             padding-top: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
@@ -199,7 +197,7 @@ Random-movie
                     const title = randomMovie.title || 'Unknown Title';
                     const year = randomMovie.release_date ? `(${new Date(randomMovie.release_date).getFullYear()})` : '';
                     const rating = randomMovie.vote_average ? `⭐ ${randomMovie.vote_average.toFixed(1)}` : '';
-                    document.getElementById('movie-title').innerText = `${title} ${year} ${rating}`;
+                    document.getElementById('movie-title').innerText = `${title} ${year} ${rating}`.trim();
                 } else {
                     document.getElementById('movie-title').innerText = 'No movies found';
                 }
