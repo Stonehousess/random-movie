@@ -114,6 +114,7 @@
                     const year = randomMovie.release_date ? `(${new Date(randomMovie.release_date).getFullYear()})` : (randomMovie.first_air_date ? `(${new Date(randomMovie.first_air_date).getFullYear()})` : '');
                     const rating = randomMovie.vote_average ? `⭐ ${randomMovie.vote_average.toFixed(1)}` : '';
                     document.getElementById('movie-title').innerText = `${title} ${year} ${rating}`.trim();
+                    console.log('Title Set:', document.getElementById('movie-title').innerText);
 document.getElementById('movie-title').innerText = '';
                 } else {
                     document.getElementById('movie-title').innerText = 'No movies found';
